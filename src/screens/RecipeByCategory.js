@@ -8,22 +8,30 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {CATEGORY_ITEMS, } from '../Data';
+import {BREAKFAST_RECIPES, BRUNCH_RECIPES, CATEGORY_ITEMS} from '../Data';
 
 const RecipeByCategory = ({route}) => {
   const navigation = useNavigation();
-//   const {selectedMealType} = route.params;
+  const {selectedMealType} = route.params;
+  console.log(selectedMealType);
 
-//   const filteredRecipes = CATEGORY_ITEMS.filter(item =>
-//     item.mealType.includes(selectedMealType),
-//   );
-//   console.log('Filtered Recipes:', filteredRecipes); 
+  //   const filteredRecipes = CATEGORY_ITEMS.filter(item =>
+  //     item.mealType.includes(selectedMealType),
+  //   );
+  //   console.log('Filtered Recipes:', filteredRecipes);
   return (
     <View style={styles.container}>
-      <View style={{marginTop:10}}>
+      <View style={{marginTop: 10}}>
         <FlatList
-          data={CATEGORY_ITEMS}
-          keyExtractor={(item) => item.id.toString()}
+          data={
+            selectedMealType == 'breakfast'
+              ? BREAKFAST_RECIPES
+              : selectedMealType == 'brunch'
+              ? BRUNCH_RECIPES
+              : []
+          }
+          //   data={CATEGORY_ITEMS}
+          //   keyExtractor={(item) => item.id.toString()}
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity
